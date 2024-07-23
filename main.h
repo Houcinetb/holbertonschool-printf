@@ -3,9 +3,9 @@
 
 #include <stdarg.h>
 
-int _printf(const char *format, ...);
-int print_char(va_list args);
-int print_string(va_list args);
 int _putchar(char c);
+int _printf(const char *format, ...);
+int print_string(char *str);
+int print_number(int n);
 
 #endif
