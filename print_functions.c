@@ -1,31 +1,31 @@
 #include "main.h"
-#include <unistd.h>
 
 /**
- * _putchar - writes the character c to stdout
+ * print_char - prints a character
  *
- * @c: The character to print
+ * @args: va_list containing the character to print
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: The number of characters printed
  */
 
-int _putchar(char c)
+int print_char(va_list args)
 {
-	return (write(1, &c, 1));
+	char c = va_arg(args, int);
+	return (_putchar(c));
 }
 
 /**
  * print_string - prints a string
  *
- * @str: The string to print
+ * @args: va_list containing the string to print
  *
  * Return: The number of characters printed
  */
 
-int print_string(char *str)
+int print_string(va_list args)
 {
 	int count = 0;
+	char *str = va_arg(args, char *);
 
 	if (!str)
 		str = "(null)";
@@ -39,15 +39,49 @@ int print_string(char *str)
 }
 
 /**
- * print_number - prints an integer
+ * print_percent - prints a percent sign
  *
- * @n: The integer to print
+ * @args: va_list
  *
  * Return: The number of characters printed
  */
 
-int print_number(int n)
+int print_percent(va_list args)
 {
+	(void)args;
+	return (_putchar('%'));
+}
+
+/**
+ * print_number_helper - Recursively prints each digit of an integer
+ *
+ * @num: The integer to print
+ *
+ * Return: The number of characters printed
+ */
+
+int print_number_helper(unsigned int num)
+{
+	int count = 0;
+
+	if (num / 10)
+		count += print_number_helper(num / 10);
+	_putchar((num % 10) + '0');
+	count++;
+	return (count);
+}
+
+/**
+ * print_number - prints an integer
+ *
+ * @args: va_list containing the integer to print
+ *
+ * Return: The number of characters printed
+ */
+
+int print_number(va_list args)
+{
+	int n = va_arg(args, int);
 	int count = 0;
 	unsigned int num;
 
@@ -61,9 +95,6 @@ int print_number(int n)
 	{
 		num = n;
 	}
-	if (num / 10)
-		count += print_number(num / 10);
-	_putchar((num % 10) + '0');
-	count++;
+	count += print_number_helper(num);
 	return (count);
 }
