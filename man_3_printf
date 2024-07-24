@@ -1,0 +1,58 @@
+NAME
+	printf - Formatting and displaying text
+
+SYNOPSIS
+	#include <stdio.h>
+
+	int printf(const char *format, ...);
+
+DESCRIPTION
+	The printf() function formats and displays text according to the format string specified in the character string format.
+	It accepts a list of arguments, which provides a great deal of flexibility in creating output formats.
+
+	This function supports an set of format specifiers, introduced by the character '%', which control how
+	the arguments are formatted and displayed.
+
+	For more detailed information, consult the documentation of the function printf(3) or the
+	specification of the function printf() of the standard C library.
+
+FORMAT SPECIFIERS
+	The following table lists the format specifiers supported by printf() :
+
+	+---------------+---------------------------------------------------------+
+	| Specifier     | 	              Description			  |
+	+---------------+---------------------------------------------------------+
+	|     %c	| Display a single character				  |
+	|     %s	| Display a string of characters			  |
+	|     %d	| Display a signed decimal 				  |
+	|     %i	| Display a signed integer				  |
+	|     %%	| Display a character '%'				  |
+	+---------------+---------------------------------------------------------+
+
+EXAMPLES OF USAGE:
+
+
+	printf("Examples decimals:[%d]\n", 42);
+	printf("Examples integers:[%i]\n", 42);
+	printf("Examples char:[%c]\n", "holberton school are the best");
+
+EXAMPLE OUTPUT:
+
+	$ ./a.out
+	Examples decimals:[42]
+	Examples integers:[42]
+	Examples char:[holberton school are the best]
+
+RETURN VALUE
+	The printf() function returns the number of characters displayed if successful. In case of an error, it returns -1.
+
+ERRORS
+	If the format string is NULL or contains only the character '%', the function quits with an error code.
+
+AUTHORS
+TIAB Houcine, GLE Rosario
+
+SEE ALSO
+	man printf
+
+Source code available at: <https://github.com/Houcinetb/holbertonschool-printf/tree/main>
