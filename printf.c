@@ -7,45 +7,47 @@
  *
  * Return: number of characters printed
  */
+
 int _printf(const char *format, ...)
 {
-	int count = 0;
 	va_list args;
-	const char *ptr;
-	int i;
+	int i = 0, j, printed_chars = 0;
 
-	specifier_t specs[] = {
+	spec_t specs[] = {
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_percent},
-		{'d', print_number},
-		{'i', print_number},
-		{'\0', NULL}
+		{'d', print_int},
+		{'i', print_int},
+		{0, NULL}
 	};
-	if (!format)
-		return (-1);
 	va_start(args, format);
-	for (ptr = format; *ptr != '\0'; ptr++)
+	while (format && format[i])
 	{
-		if (*ptr == '%')
+		if (format[i] == '%')
 		{
-			ptr++;
-			for (i = 0; specs[i].spec != '\0'; i++)
+			i++;
+			for (j = 0; specs[j].spec; j++)
 			{
-				if (*ptr == specs[i].spec)
+				if (format[i] == specs[j].spec)
 				{
-					count += specs[i].f(args);
+					printed_chars += specs[j].f(args);
 					break;
 				}
 			}
-			if (specs[i].spec == '\0')
-				count += _putchar(*ptr);
+			if (!specs[j].spec)
+			{
+				write(1, &format[i], 1);
+				printed_chars++;
+			}
 		}
 		else
 		{
-			count += _putchar(*ptr);
+			write(1, &format[i], 1);
+			printed_chars++;
 		}
+		i++;
 	}
 	va_end(args);
-	return (count);
+	return (printed_chars);
 }

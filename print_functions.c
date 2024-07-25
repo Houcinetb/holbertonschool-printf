@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * print_char - prints a character
+ * print_char - Prints a character
  *
- * @args: va_list containing the character to print
+ * @args: The list of arguments
  *
  * Return: The number of characters printed
  */
@@ -12,37 +12,37 @@ int print_char(va_list args)
 {
 	char c = va_arg(args, int);
 
-	return (_putchar(c));
+	write(1, &c, 1);
+	return (1);
 }
 
 /**
- * print_string - prints a string
+ * print_string - Prints a string
  *
- * @args: va_list containing the string to print
+ * @args: The list of arguments
  *
  * Return: The number of characters printed
  */
 
 int print_string(va_list args)
 {
-	int count = 0;
 	char *str = va_arg(args, char *);
+	int len = 0;
 
 	if (!str)
 		str = "(null)";
-	while (*str)
+	while (str[len])
 	{
-		_putchar(*str);
-		str++;
-		count++;
+		write(1, &str[len], 1);
+		len++;
 	}
-	return (count);
+	return (len);
 }
 
 /**
- * print_percent - prints a percent sign
+ * print_percent - Prints a percent sign
  *
- * @args: va_list
+ * @args: The list of arguments
  *
  * Return: The number of characters printed
  */
@@ -50,52 +50,49 @@ int print_string(va_list args)
 int print_percent(va_list args)
 {
 	(void)args;
-	return (_putchar('%'));
+	write(1, "%", 1);
+	return (1);
 }
 
 /**
- * print_number_helper - Recursively prints each digit of an integer
+ * print_int - Prints an integer
  *
- * @num: The integer to print
+ * @args: The list of arguments
  *
  * Return: The number of characters printed
  */
 
-int print_number_helper(unsigned int num)
-{
-	int count = 0;
-
-	if (num / 10)
-		count += print_number_helper(num / 10);
-	_putchar((num % 10) + '0');
-	count++;
-	return (count);
-}
-
-/**
- * print_number - prints an integer
- *
- * @args: va_list containing the integer to print
- *
- * Return: The number of characters printed
- */
-
-int print_number(va_list args)
+int print_int(va_list args)
 {
 	int n = va_arg(args, int);
-	int count = 0;
+	char buffer[20];
+	int i = 0, j, len = 0;
 	unsigned int num;
 
 	if (n < 0)
 	{
-		_putchar('-');
+		write(1, "-", 1);
 		num = -n;
-		count++;
+		len++;
 	}
 	else
 	{
 		num = n;
 	}
-	count += print_number_helper(num);
-	return (count);
+	if (num == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+	while (num > 0)
+	{
+		buffer[i++] = (num % 10) + '0';
+		num /= 10;
+	}
+	for (j = i - 1; j >= 0; j--)
+	{
+		write(1, &buffer[j], 1);
+		len++;
+	}
+	return (len);
 }

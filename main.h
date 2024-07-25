@@ -12,18 +12,17 @@
  *
  * @f: Pointer to the function that handles the specified format
  */
+
 typedef struct specifier
 {
 	char spec;
 	int (*f)(va_list);
-} specifier_t;
+} spec_t;
 
 int _printf(const char *format, ...);
-int _putchar(char c);
-int print_string(va_list args);
 int print_char(va_list args);
+int print_string(va_list args);
 int print_percent(va_list args);
-int print_number(va_list args);
-int print_number_helper(unsigned int num);
+int print_int(va_list args);
 
 #endif
