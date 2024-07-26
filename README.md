@@ -73,7 +73,7 @@ Exemples char:[holberton school sont les meilleurs]
 -----------------
 
 FLOWCHART :
-
+![flowchart printf 26_07_2024](https://github.com/user-attachments/assets/0ffecb85-b5fb-4a3f-bb29-b313df445def)
 
 -----------------
 
