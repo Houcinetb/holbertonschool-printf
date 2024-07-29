@@ -1,59 +1,76 @@
 #include "main.h"
 
 /**
- * print_char - Prints a character
+ * print_char - Imprime un caractère
  *
- * @args: The list of arguments
+ * @args: La liste des arguments
  *
- * Return: The number of characters printed
+ * Return: Le nombre de caractères imprimés
  */
 
 int print_char(va_list args)
 {
-	char c = va_arg(args, int);
+    // Récupère prochain argument le convertit en char le int
+    char c = va_arg(args, int);
 
-	_putchar(c);
-	return (1);
+    // Utilise fonction _putchar afficher le caractère
+    _putchar(c);
+
+    // Retourne 1 pour dire qu'un seul caractère a été imprimé
+    return (1);
 }
 
 /**
- * print_string - Prints a string
+ * print_string - Imprime chaîne de caractères
  *
- * @args: The list of arguments
+ * @args: La liste des arguments
  *
- * Return: The number of characters printed
+ * Return: Le nombre de caractères imprimés
  */
 
 int print_string(va_list args)
 {
-	int i, len;
-	char *str;
+    int i, len;
+    char *str;
 
-	str = va_arg(args, char*);
-	if (str == NULL)
-	{
-		str = "(null)";
-	}
-	len = strlen(str);
+    // Récupère le prochain argument en supposant qu'il est de type char*
+    str = va_arg(args, char*);
+    
+    // Si la chaîne est NULL, la remplacer par "(null)"
+    if (str == NULL)
+    {
+        str = "(null)";
+    }
+    
+    // Calcule la longueur de la chaîne
+    len = strlen(str);
 
-	for (i = 0; i < len; i++)
-	{
-		_putchar(str[i]);
-	}
-	return (len);
+    // Boucle pour afficher chaque caractère de la chaîne
+    for (i = 0; i < len; i++)
+    {
+        _putchar(str[i]);
+    }
+    
+    // Retourne le nombre de caractères imprimés
+    return (len);
 }
 
 /**
- * print_percent - Prints a percent sign
+ * print_percent - Imprime un signe pourcentage
  *
- * @args: The list of arguments
+ * @args: La liste des arguments
  *
- * Return: The number of characters printed
+ * Return: Le nombre de caractères imprimés
  */
 
 int print_percent(va_list args)
 {
-	(void)args;
-	write(1, "%", 1);
-	return (1);
+    // Indique explicitement que le paramètre args ne sera pas utilisé
+    (void)args;
+    
+    // Utilise la fonction write pour écrire le caractère '%' sur la sortie standard
+    write(1, "%", 1);
+    
+    // Retourne 1 pour indiquer qu'un seul caractère a été imprimé
+    return (1);
 }
